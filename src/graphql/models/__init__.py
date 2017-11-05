@@ -1,16 +1,11 @@
-from graphene import relay
 import graphene
+from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
 from src.intrinio import IntrionioClient
 from src.graphql import custom_types
 from src.organizations.models import Organization as OrganizationModel
 from src.graphql.models.financials import IncomeStatement, BalanceSheet, FinancialStatements
-
-
-class Financial(graphene.ObjectType):
-    tag = graphene.String()
-    value = graphene.Float()
 
 
 class StockPrice(graphene.ObjectType):
@@ -40,6 +35,7 @@ class Organization(SQLAlchemyObjectType):
         StockPrice, start_date=graphene.Argument(custom_types.DateType), end_date=graphene.Argument(custom_types.DateType)
     )
 
+    # noinspection PyUnusedLocal
     def resolve_stock_prices(self, info, **kwargs):
         from src.google_finance import historical
         if None in [self.symbol, self.market]:
@@ -56,6 +52,7 @@ class Company(graphene.ObjectType):
         StockPrice, start_date=graphene.Argument(custom_types.DateType), end_date=graphene.Argument(custom_types.DateType)
     )
 
+    # noinspection PyUnusedLocal
     def resolve_stock_prices(self, info, **kwargs):
         from src.google_finance import historical
         if None in [self.symbol, self.market]:
@@ -69,6 +66,7 @@ class Company(graphene.ObjectType):
         end_year=graphene.Argument(graphene.String)
     )
 
+    # noinspection PyUnusedLocal
     def resolve_income_statement(self, info, start_year=None, end_year=None):
         # https://api.intrinio.com/financials/standardized?identifier={symbol}&statement={statement}&fiscal_year={fiscal_year}&fiscal_period={fiscal_period}
         client = IntrionioClient()
@@ -102,6 +100,7 @@ class Company(graphene.ObjectType):
         end_year=graphene.Argument(graphene.String)
     )
 
+    # noinspection PyUnusedLocal
     def resolve_balance_sheet(self, info, start_year=None, end_year=None):
         # https://api.intrinio.com/financials/standardized?identifier={symbol}&statement={statement}&fiscal_year={fiscal_year}&fiscal_period={fiscal_period}
         client = IntrionioClient()
@@ -125,7 +124,6 @@ class Company(graphene.ObjectType):
             }
             _response = client.make_request('GET', 'financials/standardized', params=_params)
             financial_data = {row['tag']: row['value'] for row in _response['data']}
-            print(financial_data.keys())
             balance_sheets.append(BalanceSheet(**filing, **financial_data))
 
         return balance_sheets
