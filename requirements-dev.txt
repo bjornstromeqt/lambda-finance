@@ -1,0 +1,4 @@
+bpython==0.16
+pytest==3.2.3
+Flask-Migrate==2.1.1
+Flask-Script==2.0.6
