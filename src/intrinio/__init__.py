@@ -1,3 +1,4 @@
+import json
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -14,7 +15,7 @@ class IntrionioClient(object):
         password = config.current_config.INTRINIO_PASSWORD
         self.auth = HTTPBasicAuth(username, password)
 
-    def _make_request(self, method, endpoint, **kwargs):
+    def make_request(self, method, endpoint, **kwargs):
         url = '{scheme}://{netloc}/{endpoint}'.format(
             scheme=self.SCHEME,
             netloc=self.NETLOC,
@@ -22,4 +23,5 @@ class IntrionioClient(object):
         )
 
         response = requests.request(method, url, auth=self.auth, **kwargs)
-        return response
+        envelope = json.loads(response.content)
+        return envelope
