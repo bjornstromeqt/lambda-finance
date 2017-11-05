@@ -8,9 +8,9 @@ SQLAlchemy==1.1.14
 PyMySQL==0.7.11
 psycopg2==2.7.3.1
 gunicorn==19.7.1
-graphene>=2.0.dev
-graphene-sqlalchemy>=2.0.dev
-graphql-core>=2.0.dev
+graphene==2.0
+graphene-sqlalchemy==2.0
+graphql-core==2.0
 scipy==0.19.1
 sklearn==0.0
 gevent==1.2.2
