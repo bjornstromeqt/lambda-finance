@@ -61,6 +61,10 @@ class IncomeStatement(graphene.ObjectType):
     dilutedeps = graphene.Float()
     cashdividendspershare = graphene.Float()
 
+    # Not in docs
+    basicdilutedeps = graphene.Float()
+    weightedavebasicdilutedsharesos = graphene.Float()
+
 
 class BalanceSheet(graphene.ObjectType):
     # Standard filing info
@@ -73,7 +77,6 @@ class BalanceSheet(graphene.ObjectType):
     # Balance sheet items
     # : https://docs.google.com/spreadsheets/d/1SnEVxlCoYeCcU0IBL8GT2709ZmNFSkD4VZfvkaa_Wi8/edit#gid=1222559697
     cashandequivalents = graphene.Float()
-    shortterminvestments = graphene.Float()
     restrictedcash = graphene.Float()
     fedfundssold = graphene.Float()
     interestbearingdepositsatotherbanks = graphene.Float()
@@ -124,3 +127,30 @@ class BalanceSheet(graphene.ObjectType):
     noncontrollinginterests = graphene.Float()
     totalequityandnoncontrollinginterests = graphene.Float()
     totalliabilitiesandequity = graphene.Float()
+
+    # Extra, not in docs
+    shortterminvestments = graphene.Float()
+    accruedexpenses = graphene.Float()
+    noncurrentdeferredrevenue = graphene.Float()
+    othernoncurrentliabilities = graphene.Float()
+    accountspayable = graphene.Float()
+    currentdeferredrevenue = graphene.Float()
+    notereceivable = graphene.Float()
+    totalcurrentliabilities = graphene.Float()
+    othernoncurrentassets = graphene.Float()
+    totalcurrentassets = graphene.Float()
+    totalnoncurrentliabilities = graphene.Float()
+    netinventory = graphene.Float()
+    accountsreceivable = graphene.Float()
+    totalnoncurrentassets = graphene.Float()
+    netppe = graphene.Float()
+    longterminvestments = graphene.Float()
+    othercurrentassets = graphene.Float()
+    currentdeferredtaxassets = graphene.Float()
+    noncurrentdeferredtaxliabilities = graphene.Float()
+    currentemployeebenefitliabilities = graphene.Float()
+    currentdeferredtaxliabilities = graphene.Float()
+    noncurrentdeferredtaxassets = graphene.Float()
+    prepaidexpenses = graphene.Float()
+    customerdeposits = graphene.Float()
+
