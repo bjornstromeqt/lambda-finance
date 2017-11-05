@@ -17,7 +17,7 @@ def _get_data_from_spreadsheet():
     )
 
     response = requests.get(url, params=params)
-    return json.loads(response.content)
+    return json.loads(response.text)
 
 
 def get_organizations():

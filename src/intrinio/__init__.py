@@ -23,5 +23,5 @@ class IntrionioClient(object):
         )
 
         response = requests.request(method, url, auth=self.auth, **kwargs)
-        envelope = json.loads(response.content)
+        envelope = json.loads(response.text)
         return envelope
